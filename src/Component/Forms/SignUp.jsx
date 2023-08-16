@@ -77,7 +77,7 @@ const Signup = ({ setuserId }) => {
                 )}
                 {
                     success && <div className="alert alert-success" role="alert">
-                        {<p className="my-0">{`${errors[0].message}`}</p>}
+                        {<p className="my-0">{`${success[0].message}`}</p>}
                     </div>
                 }
                 <div className="col-md-6">
