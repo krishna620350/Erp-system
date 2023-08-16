@@ -50,7 +50,7 @@ const Signup = ({ setuserId }) => {
         try {
             const response = await schoolRegister.postData(formData);
             console.log(response);
-            if (response[0].success) { 
+            if (response.length === 1) { 
                 setSuccess(response)
             } else {
                 setError(response);
