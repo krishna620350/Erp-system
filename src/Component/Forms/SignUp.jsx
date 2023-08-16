@@ -1,3 +1,4 @@
+import { useState} from "react";
 import { Link } from "react-router-dom";
 import data from "../../Json/State.json"
 import { schoolRegister } from "../../Api/schoolRegistrationApi";
