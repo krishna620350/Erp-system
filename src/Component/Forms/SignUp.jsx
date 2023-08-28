@@ -1,5 +1,5 @@
-import { useState} from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import data from "../../Json/State.json"
 import { schoolRegister } from "../../Api/schoolRegistrationApi";
 
@@ -24,6 +24,8 @@ const Signup = ({ setuserId }) => {
     });
     const [errors, setError] = useState(null);
     const [success, setSuccess] = useState(null);
+    const navigate = useNavigate();
+
     const handleLocationChange = (e) => {
         const { name, value } = e.target;
         setFormdata((prevData) => ({
@@ -51,7 +53,8 @@ const Signup = ({ setuserId }) => {
             const response = await schoolRegister.postData(formData);
             console.log(response);
             if (response.length === 1 && response[0].success) { 
-                setSuccess(response)
+                setError(null);
+                setSuccess(response);
             } else {
                 setError(response);
             }
@@ -59,11 +62,13 @@ const Signup = ({ setuserId }) => {
             console.error(error);
         }
     };
-
+    useEffect(() => {
+        if (success) navigate("/verify", {state: {email: formData.email}});
+    }, [success, navigate, formData.email])
     return (
         <div className="d-flex justify-content-center align-items-center min-vh-100">
             <form className="row g-3 w-50" onSubmit={handleSubmit}>
-                <h1 className="border-bottom p-2">Sign-up</h1>
+                <h1 className="border-bottom p-2">Sign-Up</h1>
                 {errors && (
                     <div className="alert alert-danger" role="alert">
                         {errors.length === 1 ? (

@@ -1,0 +1,46 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/responsive.scss";
+.calender {
+    text-align: center;
+    background-color: $main-bg;
+    color: $main-color;
+
+    .input-body{
+        display: flex;
+        justify-content: space-around;
+
+        input{
+            background-color: $main-bg;
+            border: none;
+            border-bottom: 2px solid $main-color;
+            color: $main-color;
+        }
+    }
+}
+@media (max-width: 768px){
+    .calender {
+            .input-body {
+                display: flex;
+                justify-content: space-around;
+                flex-direction: column;
+            }
+        }
+}
+.rbc-toolbar button{
+    color: white;
+    gap: 2px;
+}
+.rbc-toolbar button:active,
+.rbc-toolbar button.rbc-active{
+    color: $main-bg;
+}
+
+.rbc-off-range-bg{
+    background: rgba(58, 3, 3, 0.432);
+}
+.rbc-button-link{
+}
+
+.rbc-today{
+    background: rgb(75, 142, 243);
+}
