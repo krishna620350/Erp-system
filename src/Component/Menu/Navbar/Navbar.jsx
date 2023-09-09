@@ -1,20 +1,12 @@
 import "./navbar.scss";
-import { AuthContext } from "../../../Auth/AuthContext"; 
-import { useContext, useEffect, useState } from "react";
 
-const Navbar = ({Name}) => {
-  const authContext = useContext(AuthContext);
-  const [userData, setUserData] = useState(null);
-  useEffect(() => {
-    setUserData(authContext.userId);
-  }, [authContext.userId]);
+const Navbar = (props) => {
 
-  console.log(authContext.userId);
   return (
     <div className="navbar">
       <div className="logo">
         <img src="logo.svg" alt="" />
-        <span>#ERP</span>
+        <span>{props.Name} - #ERP</span>
       </div>
       <div className="icons">
         <img src="/search.svg" alt="" className="icon" />
@@ -24,12 +16,12 @@ const Navbar = ({Name}) => {
           <img src="/notifications.svg" alt="" />
           <span>1</span>
         </div>
-        <div className="user">
-          <img
-            src="https://images.pexels.com/photos/11038549/pexels-photo-11038549.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-            alt=""
-          />
-          <span>{ Name }</span>
+        <div
+          className="user btn btn-outline-secondary"
+          onClick={() => props.logout()}
+        >
+          <i class="fa-solid fa-power-off"></i>
+          <span>Sign-out</span>
         </div>
         <img src="/settings.svg" alt="" className="icon" />
       </div>

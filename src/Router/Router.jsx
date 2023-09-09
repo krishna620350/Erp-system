@@ -10,8 +10,9 @@ import Home from "../pages/home/Home";
 
 const Router = () => {
   const PrivateRoute = ({ children }) => {
-    const { userId } = useContext(AuthContext);
-    if (!userId) {
+    const authContext = useContext(AuthContext);
+    console.log(authContext.userId);
+    if (!authContext.userId) {
       return <Navigate to="/" replace />;
     }
 
@@ -29,9 +30,9 @@ const Router = () => {
         <Route
           path="/dashboard"
           element={
-            // <PrivateRoute>
+            <PrivateRoute>
               <Dashboard />
-            // </PrivateRoute>
+            </PrivateRoute>
           }
         />
       </Routes>

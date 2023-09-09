@@ -1,6 +1,5 @@
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import "./dataTable.scss";
-// import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const DataTable = (props) => {
   // TEST THE API
@@ -23,7 +22,6 @@ const DataTable = (props) => {
   };
 
   const handleMenuItemClick = (content) => {
-    console.log(content);
     props.setActiveContent(content);
   };
 

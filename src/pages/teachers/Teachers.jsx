@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./products.scss";
+import "./teachers.scss";
 import DataTable from "../../Component/Table/dataTable/DataTable";
 import Add from "../../Component/Forms/add/Add";
 import { products } from "../../data";
@@ -15,61 +15,51 @@ const columns = [
     },
   },
   {
-    field: "title",
+    field: "Full Name",
     type: "string",
-    headerName: "Title",
+    headerName: "Full Name",
     width: 250,
   },
   {
-    field: "color",
-    type: "string",
-    headerName: "Color",
+    field: "Date of Birth",
+    type: "date",
+    headerName: "Date of Birth",
     width: 150,
   },
   {
-    field: "price",
-    type: "string",
-    headerName: "Price",
+    field: "Email ID",
+    type: "email",
+    headerName: "Email ID",
     width: 200,
   },
   {
-    field: "producer",
-    headerName: "Producer",
-    type: "string",
+    field: "Phone Number",
+    headerName: "Phone Number",
+    type: "tel",
     width: 200,
   },
   {
-    field: "createdAt",
-    headerName: "Created At",
+    field: "Gender",
+    headerName: "Gender",
     width: 200,
     type: "string",
   },
   {
-    field: "inStock",
-    headerName: "In Stock",
+    field: "Status",
+    headerName: "Status",
     width: 150,
     type: "boolean",
   },
 ];
 
-const Products = ({ setActiveContent }) => {
+const Teachers = ({ setActiveContent }) => {
   const [open, setOpen] = useState(false);
-
-  // TEST THE API
-
-  // const { isLoading, data } = useQuery({
-  //   queryKey: ["allproducts"],
-  //   queryFn: () =>
-  //     fetch("http://localhost:8800/api/products").then(
-  //       (res) => res.json()
-  //     ),
-  // });
 
   return (
     <div className="products">
       <div className="info">
-        <h1>Products</h1>
-        <button onClick={() => setOpen(true)}>Add New Products</button>
+        <h1>Teachers</h1>
+        <button onClick={() => setOpen(true)}>Add New Teachers</button>
       </div>
       <DataTable
         slug="product"
@@ -77,16 +67,9 @@ const Products = ({ setActiveContent }) => {
         rows={products}
         setActiveContent={setActiveContent}
       />
-      {/* TEST THE API */}
-
-      {/* {isLoading ? (
-        "Loading..."
-      ) : (
-        <DataTable slug="products" columns={columns} rows={data} />
-      )} */}
       {open && <Add slug="product" columns={columns} setOpen={setOpen} />}
     </div>
   );
 };
 
-export default Products;
+export default Teachers;

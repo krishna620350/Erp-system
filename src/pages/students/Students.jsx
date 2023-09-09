@@ -2,7 +2,7 @@ import { useState } from "react";
 import DataTable from "../../Component/Table/dataTable/DataTable";
 import Add from "../../Component/Forms/add/Add";
 import { userRows } from "../../data";
-import "./users.scss";
+import "./students.scss";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -52,7 +52,7 @@ const columns = [
   },
 ];
 
-const Users = ({ setActiveContent }) => {
+const Students = ({ setActiveContent }) => {
   const [open, setOpen] = useState(false);
 
   // TEST THE API
@@ -67,8 +67,8 @@ const Users = ({ setActiveContent }) => {
   return (
     <div className="users">
       <div className="info">
-        <h1>Users</h1>
-        <button onClick={() => setOpen(true)}>Add New User</button>
+        <h1>Students</h1>
+        <button onClick={() => setOpen(true)}>Add New Student</button>
       </div>
       <DataTable
         slug="user"
@@ -88,4 +88,4 @@ const Users = ({ setActiveContent }) => {
   );
 };
 
-export default Users;
+export default Students;

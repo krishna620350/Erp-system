@@ -1,3 +1,4 @@
+import { useState } from "react";
 import BarChartBox from "../../Component/Card/barChartBox/BarChartBox";
 import BigChartBox from "../../Component/Card/bigChartBox/BigChartBox";
 import ChartBox from "../../Component/Card/chartBox/ChartBox";
@@ -13,26 +14,26 @@ import {
 } from "../../data";
 import "./home.scss";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <div className="home">
       <div className="box box1">
         <TopBox />
       </div>
       <div className="box box2">
-        <ChartBox {...chartBoxUser} />
+        <ChartBox {...chartBoxUser} setActiveContent={props.setActiveContent} />
       </div>
       <div className="box box3">
-        <ChartBox {...chartBoxProduct} />
+        <ChartBox {...chartBoxProduct} setActiveContent={props.setActiveContent} />
       </div>
       <div className="box box4">
         <PieChartBox />
       </div>
       <div className="box box5">
-        <ChartBox {...chartBoxConversion} />
+        <ChartBox {...chartBoxConversion} setActiveContent={props.setActiveContent} />
       </div>
       <div className="box box6">
-        <ChartBox {...chartBoxRevenue} />
+        <ChartBox {...chartBoxRevenue} setActiveContent={props.setActiveContent} />
       </div>
       <div className="box box7">
         <BigChartBox />

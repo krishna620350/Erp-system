@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
 import "./chartBox.scss";
 import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
-;
 
 const ChartBox = (props) => {
+  const handleMenuItemClick = (content) => {
+    props.setActiveContent(content);
+  };
   return (
     <div className="chartBox">
       <div className="boxInfo">
@@ -12,9 +13,13 @@ const ChartBox = (props) => {
           <span>{props.title}</span>
         </div>
         <h1>{props.number}</h1>
-        <Link to="/" style={{ color: props.color }}>
+        <div
+          className="listItem"
+          onClick={() => handleMenuItemClick(props.dataKey)}
+          style={{ color: props.color }}
+        >
           View all
-        </Link>
+        </div>
       </div>
       <div className="chartInfo">
         <div className="chart">

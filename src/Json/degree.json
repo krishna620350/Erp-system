@@ -1,0 +1,24 @@
+{
+  "degrees": {
+    "10th": "10th Standard",
+    "12th": "12th Standard",
+    "btech": "Bachelor of Technology",
+    "mbbs": "Bachelor of Medicine and Bachelor of Surgery",
+    "bcom": "Bachelor of Commerce",
+    "ba": "Bachelor of Arts",
+    "bba": "Bachelor of Business Administration",
+    "bca": "Bachelor of Computer Applications",
+    "bsc": "Bachelor of Science",
+    "be": "Bachelor of Engineering",
+    "llb": "Bachelor of Laws",
+    "mtech": "Master of Technology",
+    "msc": "Master of Science",
+    "mba": "Master of Business Administration",
+    "mca": "Master of Computer Applications",
+    "mcom": "Master of Commerce",
+    "ma": "Master of Arts",
+    "phd": "Doctor of Philosophy",
+    "dpharm": "Diploma in Pharmacy",
+    "diploma": "Diploma"
+  }
+}

@@ -1,12 +1,11 @@
 import axios from "axios";
-class schoolRegistration {
+class classApi {
     constructor() {
-        this.event = "/school";
+        this.event = "/school/class";
     }
 
-    postData = async (data) => {
+    postClass = async (data) => {
         try {
-            data.foundedYear = parseInt(data.foundedYear) 
             const response = await axios.post(`${this.event}/register`, data);
             return response.data;
         } catch (error) {
@@ -15,9 +14,9 @@ class schoolRegistration {
         }
     }
 
-    getData = async (data) => {
-        try { 
-            const response = await axios.get(`${this.event}/`, { params: data });
+    getClass = async (data) => {
+        try {
+            const response = await axios.get(`${this.event}/all/`, { params: data });
             return response.data;
         } catch (error) {
             console.error("Error while sending POST request:", error.response.data);
@@ -25,9 +24,9 @@ class schoolRegistration {
         }
     }
 
-    verifyData = async (data) => {
-        try { 
-            const response = await axios.post(`${this.event}/verify`, data);
+    deleteClass = async(data) => {
+        try {
+            const response = await axios.delete(`${this.event}/delete`, { params: data });
             return response.data;
         } catch (error) {
             console.error("Error while sending POST request:", error.response.data);
@@ -36,4 +35,4 @@ class schoolRegistration {
     }
 }
 
-export const schoolRegister = new schoolRegistration();
+export const ClassApi = new classApi();
