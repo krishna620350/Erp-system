@@ -1,4 +1,3 @@
-import { useState } from "react";
 import DataTable from "../../Component/Table/dataTable/DataTable";
 import { products } from "../../data";
 
