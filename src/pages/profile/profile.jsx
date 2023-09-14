@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./profile.scss"
 import TeacherProfileForm from "../../Component/Forms/edit/EditForm";
 import { profileMenu } from "../../data";
@@ -54,6 +54,9 @@ const Profile = (props, {data}) => {
   }
   const formOpen = () => { 
       setOpen(true);
+  }
+  const handleChnageDeg = (deg) => {
+    setDegination(deg);
   }
   return (
     <div className="header__wrapper">
