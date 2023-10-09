@@ -1,113 +1,312 @@
-export const menu = [
-  {
-    id: 1,
-    title: "main",
-    listItems: [
-      {
-        id: 1,
-        title: "Homepage",
-        url: "/home",
-        icon: "fa-solid fa-house",
-      },
-      {
-        id: 2,
-        title: "Profile",
-        url: "/profile",
-        icon: "fa-solid fa-user",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Users",
-    listItems: [
-      {
-        id: 1,
-        title: "Teachers",
-        url: "/teachers",
-        icon: "fa-solid fa-chalkboard-user",
-      },
-      {
-        id: 2,
-        title: "Students",
-        url: "/students",
-        icon: "fa-solid fa-graduation-cap",
-      },
-      {
-        id: 3,
-        title: "Others",
-        url: "/others",
-        icon: "fa-solid fa-school",
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: "general",
-    listItems: [
-      {
-        id: 1,
-        title: "Chats",
-        url: "/",
-        icon: "fa-regular fa-comments",
-      },
-      {
-        id: 2,
-        title: "Classes",
-        url: "/classes",
-        icon: "fa-solid fa-c",
-      },
-      {
-        id: 3,
-        title: "Forms",
-        url: "/",
-        icon: "form.svg",
-      },
-      {
-        id: 4,
-        title: "Calendar",
-        url: "/calender",
-        icon: "fa-solid fa-calendar-days",
-      },
-    ],
-  },
-  {
-    id: 4,
-    title: "Maintenance",
-    listItems: [
-      {
-        id: 1,
-        title: "Settings",
-        url: "/",
-        icon: "setting.svg",
-      },
-      {
-        id: 2,
-        title: "Backups",
-        url: "/",
-        icon: "backup.svg",
-      },
-    ],
-  },
-  {
-    id: 5,
-    title: "analytics",
-    listItems: [
-      {
-        id: 1,
-        title: "Charts",
-        url: "/",
-        icon: "chart.svg",
-      },
-      {
-        id: 2,
-        title: "Logs",
-        url: "/",
-        icon: "log.svg",
-      },
-    ],
-  },
-];
+export const menu = {
+  school: [
+    {
+      id: 1,
+      title: "main",
+      listItems: [
+        {
+          id: 1,
+          title: "Home",
+          url: "home",
+          icon: "fa-solid fa-house",
+        },
+        {
+          id: 2,
+          title: "Profile",
+          url: "profile",
+          icon: "fa-solid fa-user",
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "Users",
+      listItems: [
+        {
+          id: 1,
+          title: "Teachers",
+          url: "teachers",
+          icon: "fa-solid fa-chalkboard-user",
+        },
+        {
+          id: 2,
+          title: "Students",
+          url: "students",
+          icon: "fa-solid fa-graduation-cap",
+        },
+        {
+          id: 3,
+          title: "Others",
+          url: "others",
+          icon: "fa-solid fa-school",
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "general",
+      listItems: [
+        {
+          id: 1,
+          title: "Chats",
+          url: "/",
+          icon: "fa-regular fa-comments",
+        },
+        {
+          id: 2,
+          title: "Classes",
+          url: "classes",
+          icon: "fa-solid fa-c",
+        },
+        {
+          id: 3,
+          title: "Forms",
+          url: "/",
+          icon: "fa-brands fa-wpforms",
+        },
+        {
+          id: 4,
+          title: "Calendar",
+          url: "calender",
+          icon: "fa-solid fa-calendar-days",
+        },
+      ],
+    },
+    {
+      id: 4,
+      title: "Maintenance",
+      listItems: [
+        {
+          id: 1,
+          title: "Settings",
+          url: "/",
+          icon: "fa-solid fa-gear",
+        },
+        {
+          id: 2,
+          title: "Backups",
+          url: "/",
+          icon: "backup.svg",
+        },
+      ],
+    },
+    {
+      id: 5,
+      title: "analytics",
+      listItems: [
+        {
+          id: 1,
+          title: "Charts",
+          url: "/",
+          icon: "chart.svg",
+        },
+        {
+          id: 2,
+          title: "Logs",
+          url: "/",
+          icon: "log.svg",
+        },
+      ],
+    },
+  ],
+  teacher: [
+    {
+      id: 1,
+      title: "main",
+      listItems: [
+        {
+          id: 1,
+          title: "Home",
+          url: "home",
+          icon: "fa-solid fa-house",
+        },
+        {
+          id: 2,
+          title: "Profile",
+          url: "profile",
+          icon: "fa-solid fa-user",
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "general",
+      listItems: [
+        {
+          id: 1,
+          title: "Chats",
+          url: "/",
+          icon: "fa-regular fa-comments",
+        },
+        {
+          id: 2,
+          title: "Classes",
+          url: "classes",
+          icon: "fa-solid fa-c",
+        },
+        {
+          id: 3,
+          title: "Forms",
+          url: "/",
+          icon: "fa-brands fa-wpforms",
+        },
+        {
+          id: 4,
+          title: "Calendar",
+          url: "calender",
+          icon: "fa-solid fa-calendar-days",
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "Maintenance",
+      listItems: [
+        {
+          id: 1,
+          title: "Settings",
+          url: "/",
+          icon: "fa-solid fa-gear",
+        },
+        {
+          id: 2,
+          title: "Backups",
+          url: "/",
+          icon: "backup.svg",
+        },
+      ],
+    },
+    {
+      id: 4,
+      title: "analytics",
+      listItems: [
+        {
+          id: 1,
+          title: "Charts",
+          url: "/",
+          icon: "chart.svg",
+        },
+        {
+          id: 2,
+          title: "Logs",
+          url: "/",
+          icon: "log.svg",
+        },
+      ],
+    },
+  ],
+  student: [
+    {
+      id: 1,
+      title: "main",
+      listItems: [
+        {
+          id: 1,
+          title: "Home",
+          url: "home",
+          icon: "fa-solid fa-house",
+        },
+        {
+          id: 2,
+          title: "Profile",
+          url: "profile",
+          icon: "fa-solid fa-user",
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "Users",
+      listItems: [
+        {
+          id: 1,
+          title: "Teachers",
+          url: "teachers",
+          icon: "fa-solid fa-chalkboard-user",
+        },
+        {
+          id: 2,
+          title: "Students",
+          url: "students",
+          icon: "fa-solid fa-graduation-cap",
+        },
+        {
+          id: 3,
+          title: "Others",
+          url: "others",
+          icon: "fa-solid fa-school",
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "general",
+      listItems: [
+        {
+          id: 1,
+          title: "Chats",
+          url: "/",
+          icon: "fa-regular fa-comments",
+        },
+        {
+          id: 2,
+          title: "Classes",
+          url: "classes",
+          icon: "fa-solid fa-c",
+        },
+        {
+          id: 3,
+          title: "Forms",
+          url: "/",
+          icon: "fa-brands fa-wpforms",
+        },
+        {
+          id: 4,
+          title: "Calendar",
+          url: "calender",
+          icon: "fa-solid fa-calendar-days",
+        },
+      ],
+    },
+    {
+      id: 4,
+      title: "Maintenance",
+      listItems: [
+        {
+          id: 1,
+          title: "Settings",
+          url: "/",
+          icon: "fa-solid fa-gear",
+        },
+        {
+          id: 2,
+          title: "Backups",
+          url: "/",
+          icon: "backup.svg",
+        },
+      ],
+    },
+    {
+      id: 5,
+      title: "analytics",
+      listItems: [
+        {
+          id: 1,
+          title: "Charts",
+          url: "/",
+          icon: "chart.svg",
+        },
+        {
+          id: 2,
+          title: "Logs",
+          url: "/",
+          icon: "log.svg",
+        },
+      ],
+    },
+  ],
+};
+
 
 export const profileMenu = [
   {

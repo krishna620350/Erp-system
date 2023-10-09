@@ -4,7 +4,11 @@
     text-align: center;
     background-color: $main-bg;
     color: $main-color;
-
+    width: 100%;
+    h1{
+        width: fit-content;
+        border-bottom: 2px solid $soft-color;
+    }
     .input-body{
         display: flex;
         justify-content: space-around;
@@ -19,12 +23,12 @@
 }
 @media (max-width: 768px){
     .calender {
-            .input-body {
-                display: flex;
-                justify-content: space-around;
-                flex-direction: column;
-            }
+        .input-body {
+            display: flex;
+            justify-content: space-around;
+            flex-direction: column;
         }
+    }
 }
 .rbc-toolbar button{
     color: white;

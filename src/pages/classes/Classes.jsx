@@ -2,12 +2,11 @@ import { useEffect, useMemo, useState, lazy, Suspense } from "react";
 import Class from "../class/class";
 import { ClassApi } from "../../Api/Classapi";
 import "./classes.scss";
-import ClassDetail from "./ClassDetail";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 
 
 const LazyComponent = {
   CreateClass: lazy(() => import("../class/CreateClass")),
-  ClassDetail: lazy(() => import("./ClassDetail")),
 };
 const columns = [
   {
@@ -43,13 +42,15 @@ const columns = [
 
 const Classes = (props) => {
   const [classArray, setClassArray] = useState([]);
-  const [createClass, setCreateClass] = useState(false);
-  const [openClass, setOpenClass] = useState(null);
   const [reloadComponent, setReloadComponent] = useState(false);
 
+  const navigate = useNavigate();
+
+  const navigatePage = () => {
+    return navigate("");
+  }
   const handleClick = () => {
     setReloadComponent(false);
-    setCreateClass(true);
   };
   
   const data = useMemo(() => {
@@ -97,27 +98,42 @@ const Classes = (props) => {
 
   return (
     <>
-      {openClass ? (<ClassDetail setOpenClass={setOpenClass} openClass={ openClass } />) : (
-        <div className="display-g">
-          <div className="button-container" >
-            <button className="btn btn-dark w-100 h-100 opacity-25 btn-border" onClick={handleClick}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route
+            path="createclass"
+            element={
+              <LazyComponent.CreateClass
+                columns={columns}
+                navigate={navigatePage}
+                setReloadComponent={setReloadComponent}
+              />
+            }
+          />
+        </Routes>
+      </Suspense>
+      <div className="display-g">
+        <div className="button-container">
+          <Link to="createclass" onClick={handleClick}>
+            <button className="btn btn-dark w-100 h-100 opacity-25 btn-border">
               <span className="fs-1">
                 <i className="fa-solid fa-plus"></i>
               </span>
             </button>
-          </div>
-          {classArray.length > 0 && classArray.map((value, index) => (
+          </Link>
+        </div>
+        {classArray.length > 0 &&
+          classArray.map((value, index) => (
             <div className="button-container" key={index}>
-              <Class {...value} deleteClass={handleDeleteClass} setOpenClass={ setOpenClass } />
+              <Class
+                {...value}
+                deleteClass={handleDeleteClass}
+                setClassDetails={props.setClassDetails}
+                setActiveContent={props.setActiveContent}
+              />
             </div>
           ))}
-          {createClass &&
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyComponent.CreateClass columns={columns} setCreateClass={setCreateClass} userId={props.userId} setReloadComponent={setReloadComponent} />
-            </Suspense>
-          }
-        </div>
-      )}
+      </div>
     </>
   );
 }

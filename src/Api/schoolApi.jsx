@@ -15,16 +15,6 @@ class schoolRegistration {
         }
     }
 
-    getData = async (data) => {
-        try { 
-            const response = await axios.get(`${this.event}/`, { params: data });
-            return response.data;
-        } catch (error) {
-            console.error("Error while sending POST request:", error.response.data);
-            return error.response.data;
-        }
-    }
-
     verifyData = async (data) => {
         try { 
             const response = await axios.post(`${this.event}/verify`, data);

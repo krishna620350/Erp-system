@@ -22,9 +22,10 @@ const localizer = dateFnsLocalizer({
 
 const Calender = () => {
   const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
-  const [allEvents, setAllEvents] = useState();
+  const [allEvents, setAllEvents] = useState([]);
 
   const handleAddEvent = () => {
+    console.log(allEvents);
     for (let i = 0; i < allEvents.length; i++) {
       const d1 = new Date(allEvents[i].start);
       const d2 = new Date(newEvent.start);

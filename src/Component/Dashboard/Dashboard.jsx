@@ -1,94 +1,109 @@
-import Home from "../../pages/home/Home";
+import React, { Suspense, useContext, useState, lazy } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "../Menu/Navbar/Navbar";
 import Menu from "../Menu/Menu/Menu";
 import Footer from "../Bundles/footer/Footer";
 import { AuthContext } from "../../Auth/AuthContext";
-
 import "../../styles/global.scss";
 
-import { useContext, useState, lazy, Suspense } from "react";
-import { useLocation } from "react-router-dom";
-
-
 const LazyComponent = {
-  Calender : lazy(() => import("../Bundles/calender/calender")),
+  Calender: lazy(() => import("../Bundles/calender/calender")),
   Classes: lazy(() => import("../../pages/classes/Classes")),
+  ClassDetail: lazy(() => import("../../pages/classes/ClassDetail")),
+  Home: lazy(() => import("../../pages/home/Home")),
   Profile: lazy(() => import("../../pages/profile/profile")),
   Product: lazy(() => import("../../pages/product/Product")),
   Students: lazy(() => import("../../pages/students/Students")),
   Teachers: lazy(() => import("../../pages/teachers/Teachers")),
   User: lazy(() => import("../../pages/user/User")),
-}
+  PageNotFound: lazy(() => import("../../pages/error/pageNotFound")),
+};
 
 const Dashboard = () => {
-  const [activeContent, setActiveContent] = useState("/home"); // Use state to manage active content
   const [previousCase, setPreviousCase] = useState([]);
   const authContext = useContext(AuthContext);
-  const location = useLocation();
-  const { data } = location.state;
+  const navigate = useNavigate();
+  const [classDetails, setClassDetails] = useState(null);
   const navigateTo = (newContent) => {
-    setPreviousCase([...previousCase, activeContent]); // Store the current case as previous
-    setActiveContent(newContent);
+    setPreviousCase((prev) => [...prev, window.location.pathname]);
+    navigate(newContent);
   };
-
   const goBack = () => {
     if (previousCase.length > 0) {
-      const lastCase = previousCase.pop(); // Remove the last item from the array
-      setActiveContent(lastCase);
-      setPreviousCase([...previousCase]); // Update the array
+      const lastCase = previousCase.pop();
+      navigate(lastCase);
+      setPreviousCase([...previousCase]);
     }
   };
-
-  const renderContent = () => {
-    const [caseString, operationalString] = activeContent
-      .split("/")
-      .slice(1, 3);
-    const newCaseString = `/${caseString}`;
-    switch (newCaseString) {
-      case "/calender":
-        return <LazyComponent.Calender />;
-      case "/classes":
-        return <LazyComponent.Classes userId={ authContext.userId } />;
-      case "/home":
-        return <Home setActiveContent={navigateTo} />;
-      case "/profile":
-        return <LazyComponent.Profile userId={ authContext.userId } data={data} />;
-      case "/product":
-        return <LazyComponent.Product id={operationalString} />;
-      case "/students":
-        return <LazyComponent.Students setActiveContent={navigateTo} />;
-      case "/teachers":
-        return <LazyComponent.Teachers setActiveContent={navigateTo} />;
-      case "/user":
-        return <LazyComponent.User id={operationalString} />;
-      // Add more cases for other content
-      default:
-        return <Home />;
-    }
-  };
-    return (
-      <div className="main">
-        <Navbar
-          Name={data.name}
-          logout={() => authContext.logout()}
-          setActiveContent={navigateTo}
-        />
-        <div className="container">
-          <div className="menuContainer">
-            <Menu setActiveContent={navigateTo} />
-          </div>
-          <div className="contentContainer">
-            <button className="btn btn-dark mb-2" onClick={goBack}>
-              <i class="fa-solid fa-arrow-left"></i> Back
-            </button>
-            <Suspense fallback={<div>Loading...</div>}>
-              {renderContent()}
-            </Suspense>
-          </div>
+  return (
+    <div className="main">
+      <Navbar
+        user={authContext.user.data}
+        logout={() => authContext.logout()}
+        setActiveContent={navigateTo}
+      />
+      <div className="container">
+        <div className="menuContainer">
+          <Menu setActiveContent={navigateTo} userType={ authContext.user.data.type } />
         </div>
-        <Footer />
+        <div className="contentContainer">
+          <button className="btn btn-dark mb-2" onClick={goBack}>
+            <i className="fa-solid fa-arrow-left"></i> Back
+          </button>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route path="/*" element={<LazyComponent.PageNotFound />} />
+              <Route path="/" element={<LazyComponent.Home />} />
+              <Route path="calender" element={<LazyComponent.Calender />} />
+              <Route
+                path="classes/*"
+                element={
+                  <LazyComponent.Classes
+                    userId={authContext.user.id}
+                    setActiveContent={navigateTo}
+                    setClassDetails={setClassDetails}
+                  />
+                }
+              />
+              <Route
+                path="classes/details"
+                element={
+                  <LazyComponent.ClassDetail classDetails={classDetails} />
+                }
+              />
+              <Route
+                path="profile"
+                element={
+                  <LazyComponent.Profile
+                    userId={authContext.user.id}
+                    data={authContext.user.data}
+                  />
+                }
+              />
+              <Route path="product" element={<LazyComponent.Product />} />
+              <Route
+                path="students"
+                element={
+                  <LazyComponent.Students setActiveContent={navigateTo} />
+                }
+              />
+              <Route
+                path="teachers"
+                element={
+                  <LazyComponent.Teachers
+                    setActiveContent={navigateTo}
+                    userId={authContext.user.id}
+                  />
+                }
+              />
+              <Route path="user" element={<LazyComponent.User />} />
+            </Routes>
+          </Suspense>
+        </div>
       </div>
-    );
-}
+      <Footer />
+    </div>
+  );
+};
 
-export { Dashboard };
+export default Dashboard;

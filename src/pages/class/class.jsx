@@ -1,17 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Class = (props) => {
-    const data = props.data;
-    
+  const data = props.data;
+  const handleClick = () => {
+    props.setActiveContent("classes");
+  }
+  if (!data) {
+    return <div>No class available</div>
+  }
     return (
       <div className="card bg-transparent">
         <h5 className="card-header text-white">
           <div className="d-flex justify-content-between">
             <span>Class Details</span>
-            <span>
-              <button className="btn p-0" onClick={() => props.setOpenClass(data)}>
+            <span onClick={() => props.setClassDetails(data) }>
+              <Link to="details" className="btn p-0" onClick={()=>handleClick()}>
                 <i className="fa-solid fa-expand"></i>
-              </button>
+              </Link>
             </span>
           </div>
           <p class="fs-6 mt-2 mb-0 text-secondary">

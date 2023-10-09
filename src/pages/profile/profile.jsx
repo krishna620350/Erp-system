@@ -42,12 +42,11 @@ const workExperienceData = [
   },
 ];
 
-const Profile = (props, {data}) => {
+const Profile = (props) => {
   const [sectionShow, setSection] = useState("/details");
   const [open, setOpen] = useState(false);
   const [degination, setDegination] = useState("School");
   const menuItems = profileMenu.find((menu) => menu.title === "school");
-  console.log(props.data)
   const converteddata = convertDataToSpecificFormat(props.data);
   const handleChangeSection = (section) => {
       setSection(section);
@@ -55,16 +54,13 @@ const Profile = (props, {data}) => {
   const formOpen = () => { 
       setOpen(true);
   }
-  const handleChnageDeg = (deg) => {
-    setDegination(deg);
-  }
   return (
     <div className="header__wrapper">
       <header></header>
       <div className="cols__container">
         <div className="left__col">
           <div className="img__container">
-            <img src="noavatar.png" alt="Anna Smith" />
+            <img src={props.data.photoUrl} alt="Anna Smith" />
             <span></span>
           </div>
           <h2>{ props.userId }</h2>

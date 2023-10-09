@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { schoolRegister } from "../../Api/schoolRegistrationApi";
+import { schoolRegister } from "../../Api/schoolApi";
 import { AuthContext } from "../../Auth/AuthContext";
 
 

@@ -1,7 +1,7 @@
 import { useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import data from "../../Json/State.json"
-import { schoolRegister } from "../../Api/schoolRegistrationApi";
+import { schoolRegister } from "../../Api/schoolApi";
 
 const Signup = ({ setuserId }) => {
     const [formData, setFormdata] = useState({
@@ -156,4 +156,4 @@ const Signup = ({ setuserId }) => {
     );
 }
 
-export { Signup };
+export default Signup ;

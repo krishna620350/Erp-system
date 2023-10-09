@@ -1,30 +1,25 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext } from "react";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-    const [userId, setUserId] = useState(null);
+    const [user, setUser] = useState(() => {
+        const storedUser = localStorage.getItem("user");
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
 
-    // Try to auto-login using session storage
-    useEffect(() => {
-        const storedUserId = sessionStorage.getItem("userId");
-        if (storedUserId) {
-            setUserId(storedUserId);
-        }
-    }, []);
-
-    const login = (userId) => {
-        setUserId(userId);
-        sessionStorage.setItem("userId", userId); // Store user ID in session storage
+    const login = (userData) => {
+        setUser(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
     };
 
     const logout = () => {
-        setUserId(null);
-        sessionStorage.removeItem("userId"); // Remove user ID from session storage
+        setUser(null);
+        localStorage.removeItem("user");
     };
 
     return (
-        <AuthContext.Provider value={{ userId, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

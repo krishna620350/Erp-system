@@ -22,7 +22,6 @@ const CreateClass = (props) => {
         const response = await ClassApi.postClass(classData);
         if (response.message === true) {
             props.setReloadComponent(true);
-            props.setCreateClass(false);
         } else {
             setError(response);
         }
@@ -31,7 +30,7 @@ const CreateClass = (props) => {
     return (
       <div className="add">
         <div className="model">
-          <span className="close" onClick={() => props.setCreateClass(false)}>
+          <span className="close" onClick={props.navigate}>
             X
           </span>
           <h1>Add new Class</h1>

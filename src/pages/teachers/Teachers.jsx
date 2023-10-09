@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./teachers.scss";
 import DataTable from "../../Component/Table/dataTable/DataTable";
 import Add from "../../Component/Forms/add/Add";
-import { products } from "../../data";
-
+import { TeacherApiObject } from "../../Api/TeacherApi";
 const columns = [
-  { field: "id", headerName: "ID", width: 90 },
+  { field: "id", headerName: "ID", width: 130 },
   {
     field: "img",
     headerName: "Image",
@@ -15,59 +14,82 @@ const columns = [
     },
   },
   {
-    field: "Full Name",
+    field: "full name",
     type: "string",
     headerName: "Full Name",
-    width: 250,
+    name: "name",
+    width: 200,
   },
   {
-    field: "Date of Birth",
+    field: "date of birth",
     type: "date",
     headerName: "Date of Birth",
-    width: 150,
+    name: "dateOfBirth",
+    width: 120,
   },
   {
-    field: "Email ID",
+    field: "email id",
     type: "email",
     headerName: "Email ID",
+    name: "email",
     width: 200,
   },
   {
-    field: "Phone Number",
-    headerName: "Phone Number",
+    field: "phone number",
     type: "tel",
-    width: 200,
-  },
-  {
-    field: "Gender",
-    headerName: "Gender",
-    width: 200,
-    type: "string",
-  },
-  {
-    field: "Status",
-    headerName: "Status",
+    headerName: "Phone Number",
+    name: "phoneNumber",
     width: 150,
+  },
+  {
+    field: "gender",
+    type: "string",
+    headerName: "Gender",
+    name: "gender",
+    width: 90,
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 90,
     type: "boolean",
   },
 ];
 
-const Teachers = ({ setActiveContent }) => {
+const Teachers = (props) => {
   const [open, setOpen] = useState(false);
+  const [Teachers, setTeachers] = useState([]);
+  const [reload, setReload] = useState(true);
+  const data = useMemo(() => {
+    return { userId: props.userId };
+  }, [props.userId]);
 
+  useEffect(() => {
+    if (reload) { 
+      const fetchTeacher = async() => {
+        const response = await TeacherApiObject.getData(data);
+        const newResponse = response.map((teacher) => ({
+          ...teacher,
+          'date of birth': new Date(teacher['date of birth']),
+        }));
+        setTeachers(newResponse);
+      }
+      fetchTeacher();
+    }
+    setReload(false)
+  }, [reload, data])
   return (
     <div className="products">
       <div className="info">
         <h1>Teachers</h1>
         <button onClick={() => setOpen(true)}>Add New Teachers</button>
       </div>
-      <DataTable
-        slug="product"
+      {Teachers.length < 0 ? <p>no record found</p> : (<DataTable
+        slug="Teacher"
         columns={columns}
-        rows={products}
-        setActiveContent={setActiveContent}
-      />
-      {open && <Add slug="product" columns={columns} setOpen={setOpen} />}
+        rows={Teachers}
+      />)}
+      {open && <Add slug="Teacher" columns={columns} setOpen={setOpen} userId={props.userId} setReload={ setReload } />}
     </div>
   );
 };

@@ -1,13 +1,24 @@
+@import "../../../styles/variables.scss";
 .dataTable{
   overflow-y: hidden;
   .dataGrid{
-    background: white;
+    background: $main-color;
     padding: 20px;
 
     .MuiDataGrid-toolbarContainer{
       flex-direction: row-reverse;
     }
-
+    .MuiDataGrid-columnHeader {
+      border-right: 1px solid #474747;
+      background-color: $main-bg;
+      color: $main-color;
+    }
+    .MuiDataGrid-cell {
+      border-right: 1px solid #555454;
+    }
+    .MuiDataGrid-cell:last-child, .MuiDataGrid-columnHeader:last-child {
+      border-right: none;
+    }
     img{
       width: 32px;
       height: 32px;
@@ -26,4 +37,11 @@
       }
     }
   }
+}
+
+.active-row {
+  background-color: rgb(201, 250, 201);
+}
+.inactive-row {
+  background-color: rgb(250, 201, 201);
 }

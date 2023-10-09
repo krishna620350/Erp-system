@@ -1,44 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./add.scss";
-// import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { TeacherApiObject } from "../../../Api/TeacherApi";
 
 const Add = (props) => {
-  // TEST THE API
-  // const queryClient = useQueryClient();
-
-  // const mutation = useMutation({
-  //   mutationFn: () => {
-  //     return fetch(`http://localhost:8800/api/${props.slug}s`, {
-  //       method: "post",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         id: 111,
-  //         img: "",
-  //         lastName: "Hello",
-  //         firstName: "Test",
-  //         email: "testme@gmail.com",
-  //         phone: "123 456 789",
-  //         createdAt: "01.02.2023",
-  //         verified: true,
-  //       }),
-  //     });
-  //   },
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries([`all${props.slug}s`]);
-  //   },
-  // });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    //add new item
-    // mutation.mutate();
-    props.setOpen(false);
-  };
   
+  const [formData, setFormData] = useState({
+    schoolId: props.userId,
+    name: "",
+    dateOfBirth: "",
+    email: "",
+    phoneNumber: "",
+    gender: ""
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (props.slug === "Teacher") {
+      try {
+        const response = await TeacherApiObject.postData(formData);
+        if (response.success) {
+          props.setOpen(false);
+          props.setReload(true);
+        }
+      } catch (e) {
+        console.error(e.message);
+      }
+    }
+  };
   return (
     <div className="add">
       <div className="model">
@@ -48,11 +43,11 @@ const Add = (props) => {
         <h1>Add new {props.slug}</h1>
         <form onSubmit={handleSubmit}>
           {props.columns
-            .filter((item) => item.field !== "id" && item.field !== "img")
+            .filter((item) => item.field !== "id" && item.field !== "img" && item.field !== "status")
             .map((column) => (
               <div className="item" key={column.field}>
                 <label>{column.headerName}</label>
-                <input type={column.type} placeholder={column.field} />
+                <input type={column.type} name={column.name} value={formData[column.name]} onChange={handleChange} placeholder={column.field} />
               </div>
             ))}
           <button>Send</button>

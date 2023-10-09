@@ -1,0 +1,32 @@
+@import "../../styles/variables.scss";
+
+.error-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: $main-bg;
+    
+    .error-content {
+        text-align: center;
+        
+        .error-number {
+            font-size: 6em;
+            color: $soft-color;
+            font-weight: bold;
+        }
+        
+        .error-message {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .error-description {
+            font-size: 1.2em;
+            color: $main-color;
+        }
+    }
+}
+
+
+/* Add more styles as needed */
